@@ -5,7 +5,7 @@
   <!-- Basic Page Needs
   –––––––––––––––––––––––––––––––––––––––––––––––––– -->
   <meta charset="utf-8">
-  <title>Your page title here :)</title>
+  <title>Tree Planning Calculator</title>
   <meta name="description" content="">
   <meta name="author" content="">
 
@@ -54,9 +54,7 @@
 <p>
        <h4> Number of trees:  <span id="tree_total"></span></h4>
        <br />
-       <h4> Carbon sequestered in 10 years: <span id="carbon_use"></span></h4>
-       <br />
-       <h4> Cost per year: <span id="carbon_use"></span></h4>
+       <h4> Average tonnes carbon sequestered per year: <span id="carbon_use"></span></h4>
        <br />
 </p>
       </div>
@@ -69,13 +67,12 @@
       var usable_percent = Number($('#second').val()); // convert it to a float
       var tree_distance  = Number($('#third').val());
 
-      var tree_total = Math.round((contour_length*(usable_percent/100))/tree_distance);
-      var carbon_use = 0;
+      var tree_total = Math.round((contour_length*(usable_percent/100))/tree_distance); // calculate value
+      var carbon_use = (7.2/1000)*tree_total;
       if($.isNumeric(tree_total)){
-        $('#tree_total').html(tree_total); // add them and output it
+        $('#tree_total').html(tree_total);
+        $('#carbon_use').html(carbon_use);
       }
-
-
   // add them and output it
   });
   </script>
