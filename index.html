@@ -41,9 +41,8 @@
         <p>Estimates tree planting from GIS derived statistics</p>
         <p>
           <strong>Example contour lengths (m)</strong><br />
-          5m Spring Valley: 170091<br />
-          5m Monaro: <br />
-          10m Monaro: <br />
+          5m Spring Valley: 170091 (170 km)<br />
+          10m Monaro: 178626143892 (178,626 km)<br />
         </p>
 <p>
         <h4>Length of contours to plant (m): </h4><br />
@@ -67,6 +66,7 @@
        <h4> Number of mature trees expected:  <span id="tree_mature"></span></h4>
        <br />
        <h4> Average total tonnes carbon sequestered per year: <span id="carbon_use"></span></h4>
+       <h4> (<span id="percent_nsw"></span>% of NSW 2013/14 emissions)</h4>
        <br />
 </p>
       </div>
@@ -74,6 +74,9 @@
   </div>
   <script type="text/javascript" src="rangeslider.min.js"></script>
   <script type="text/javascript">
+  function numberWithCommas(x) {
+    return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+  }
   $('input').change(function(){ // run anytime the value changes
       var contour_length  = Number($('#first').val());   // get value of field
       var usable_percent = Number($('#second').val()); // convert it to a float
@@ -83,10 +86,12 @@
       var tree_planted = Math.round((contour_length*(usable_percent/100))/tree_distance); // calculate value
       var tree_mature = Math.round(tree_planted*(tree_survival/100))
       var carbon_use = ((7.2/1000)*tree_mature).toFixed(2);
+      var percent_nsw = (carbon_use/1302000).toFixed(2);
       if($.isNumeric(tree_planted)){
-        $('#tree_planted').html(tree_planted);
-        $('#tree_mature').html(tree_mature);
-        $('#carbon_use').html(carbon_use);
+        $('#tree_planted').html(tree_planted.toLocaleString());
+        $('#tree_mature').html(tree_mature.toLocaleString());
+        $('#carbon_use').html(numberWithCommas(carbon_use));
+        $('#percent_nsw').html(percent_nsw);
       }
   // add them and output it
   });
