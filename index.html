@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+  <!-- Basic Page Needs
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <meta charset="utf-8">
+  <title>Your page title here :)</title>
+  <meta name="description" content="">
+  <meta name="author" content="">
+
+  <!-- Mobile Specific Metas
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- FONT
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <link href="https://fonts.googleapis.com/css?family=Raleway:400,300,600" rel="stylesheet" type="text/css">
+
+  <!-- CSS
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <link rel="stylesheet" href="css/normalize.css">
+  <link rel="stylesheet" href="css/skeleton.css">
+  <link rel="stylesheet" href="rangeslider.css">
+
+  <!-- Favicon
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <link rel="icon" type="image/png" href="images/favicon.png">
+  <script type="text/javascript" src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
+
+
+</head>
+<body>
+
+  <!-- Primary Page Layout
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <div class="container">
+    <div class="row">
+      <div class="half column" style="margin-top: 10%">
+        <h1>Tree Planning Calculator</h1>
+        <p>This tool helps with planning tree planting from GIS data statistics!</p>
+<p>
+        <h4>Length of contours to plant (in meters): </h4><br />
+        <input id='first' type="text" class="form-control formBlock u-full-width" name="contour_length"  placeholder="Contour length (m)" required/><br />
+        <br />
+
+        <h4>Amount to be planted with trees: <br /></h4><br /><br />
+       <input id='second' type="range" min="0" max="100" step="5" labels="0, 50, 100" name="usable_percent" data-rangeslider/> <output></output><br /><br />
+
+       <h4>Distance between trees: </h4><br />
+       <input id='third' type="text" class="form-control formBlock u-full-width" name="tree_distance"  placeholder="Distance between trees (m)" /><br />
+<br /><br /><br />
+</p>
+<p>
+       <h4> Number of trees:  <span id="tree_total"></span></h4>
+       <br />
+       <h4> Carbon sequestered in 10 years: <span id="carbon_use"></span></h4>
+       <br />
+       <h4> Cost per year: <span id="carbon_use"></span></h4>
+       <br />
+</p>
+      </div>
+    </div>
+  </div>
+  <script type="text/javascript" src="rangeslider.min.js"></script>
+  <script type="text/javascript">
+  $('input').change(function(){ // run anytime the value changes
+      var contour_length  = Number($('#first').val());   // get value of field
+      var usable_percent = Number($('#second').val()); // convert it to a float
+      var tree_distance  = Number($('#third').val());
+
+      var tree_total = Math.round((contour_length*(usable_percent/100))/tree_distance);
+      var carbon_use = 0;
+      if($.isNumeric(tree_total)){
+        $('#tree_total').html(tree_total); // add them and output it
+      }
+
+
+  // add them and output it
+  });
+  </script>
+  <script>
+  $('input[type="range"]').rangeslider({
+    // Feature detection the default is `true`.
+      // Set this to `false` if you want to use
+      // the polyfill also in Browsers which support
+      // the native <input type="range"> element.
+      polyfill: false,
+
+      // Default CSS classes
+      rangeClass: 'rangeslider',
+      disabledClass: 'rangeslider--disabled',
+      horizontalClass: 'rangeslider--horizontal',
+      fillClass: 'rangeslider__fill',
+      handleClass: 'rangeslider__handle',
+
+      // Callback function
+      onInit: function() {
+        $rangeEl = this.$range;
+        // add value label to handle
+        var $handle = $rangeEl.find('.rangeslider__handle');
+        var handleValue = '<div class="rangeslider__handle__value">' + this.value + '</div>';
+        $handle.append(handleValue);
+
+        // get range index labels
+        var rangeLabels = this.$element.attr('labels');
+        rangeLabels = rangeLabels.split(', ');
+
+        // add labels
+        $rangeEl.append('<div class="rangeslider__labels"></div>');
+        $(rangeLabels).each(function(index, value) {
+          $rangeEl.find('.rangeslider__labels').append('<span class="rangeslider__labels__label">' + value + '</span>');
+        })
+      },
+
+      // Callback function
+      onSlide: function(position, value) {
+        var $handle = this.$range.find('.rangeslider__handle__value');
+        $handle.text(this.value);
+      },
+
+      // Callback function
+      onSlideEnd: function(position, value) {}
+  });
+
+</script>
+<!-- End Document
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+</body>
+</html>
