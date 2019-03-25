@@ -68,7 +68,7 @@
       var tree_distance  = Number($('#third').val());
 
       var tree_total = Math.round((contour_length*(usable_percent/100))/tree_distance); // calculate value
-      var carbon_use = (7.2/1000)*tree_total;
+      var carbon_use = ((7.2/1000)*tree_total).toFixed(2);
       if($.isNumeric(tree_total)){
         $('#tree_total').html(tree_total);
         $('#carbon_use').html(carbon_use);
