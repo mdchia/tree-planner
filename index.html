@@ -66,7 +66,8 @@
        <h4> Number of mature trees expected:  <span id="tree_mature"></span></h4>
        <br />
        <h4> Average total tonnes carbon sequestered per year: <span id="carbon_use"></span></h4>
-       <h4> (<span id="percent_nsw"></span>% of NSW 2013/14 emissions)</h4>
+       <h4> (<span id="percent_nsw"></span>% of NSW 2013/14 emissions, or</h4>
+       <h4> -<span id="degree_c_warming"></span>&#176;C global warming)</h4>
        <br />
 </p>
       </div>
@@ -87,11 +88,13 @@
       var tree_mature = Math.round(tree_planted*(tree_survival/100))
       var carbon_use = ((7.2/1000)*tree_mature).toFixed(2);
       var percent_nsw = (carbon_use/1302000).toFixed(2);
+      var degree_c_warming = ((carbon_use/1000000000000)*2).toFixed(5);
       if($.isNumeric(tree_planted)){
         $('#tree_planted').html(tree_planted.toLocaleString());
         $('#tree_mature').html(tree_mature.toLocaleString());
         $('#carbon_use').html(numberWithCommas(carbon_use));
         $('#percent_nsw').html(percent_nsw);
+        $('#degree_c_warming').html(degree_c_warming);
       }
   // add them and output it
   });
