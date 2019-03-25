@@ -40,7 +40,7 @@
         <h1>Tree Planning Calculator</h1>
         <p>This tool helps with planning tree planting from GIS data statistics!</p>
 <p>
-        <h4>Length of contours to plant (in meters): </h4><br />
+        <h4>Length of contours to plant (m): </h4><br />
         <input id='first' type="text" class="form-control formBlock u-full-width" name="contour_length"  placeholder="Contour length (m)" required/><br />
         <br />
 
@@ -48,8 +48,8 @@
        <input id='second' type="range" min="0" max="100" step="5" labels="0, 50, 100" name="usable_percent" value="80" data-rangeslider/> <output></output><br /><br />
        <!-- slider from https://codepen.io/nilsborg/pen/BdjedR -->
 
-       <h4>Distance between trees: </h4><br />
-       <input id='third' type="text" class="form-control formBlock u-full-width" name="tree_distance"  placeholder="Distance between trees (m)" /><br />
+       <h4>Distance between trees (m): </h4><br />
+       <input id='third' type="text" class="form-control formBlock u-full-width" name="tree_distance" value="5" placeholder="Distance between trees (m)" /><br />
 
        <h4>Expected tree survival: <br /></h4><br /><br />
       <input id='fourth' type="range" min="0" max="100" step="5" labels="0, 50, 100" name="tree_survival" value="90" data-rangeslider/> <output></output><br /><br />
